@@ -1,0 +1,26 @@
+<p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="productoModel.nombre"
+           type="text"
+           placeholder="Nombre">
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field>
+      <textarea rows="10" matInput [(ngModel)]="productoModel.descripcion"
+                placeholder="Descripción"></textarea>
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="productoModel.precio"
+           type="number"
+           placeholder="Precio">
+  </mat-form-field>
+</p>
+<label for="fotos">Fotos</label>
+<br>
+<input #foto required id="fotos" multiple type="file">
+<p>
+  <button (click)="guardar()" mat-flat-button color="accent">Guardar</button>
+</p>

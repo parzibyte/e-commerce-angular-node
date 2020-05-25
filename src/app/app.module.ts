@@ -14,10 +14,22 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {ProductosComponent} from './productos/productos.component';
+import {ClientesComponent} from './clientes/clientes.component';
+import {VentasComponent} from './ventas/ventas.component';
+import {TiendaComponent} from './tienda/tienda.component';
+import {AgregarProductoComponent} from './agregar-producto/agregar-producto.component';
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductosComponent,
+    ClientesComponent,
+    VentasComponent,
+    TiendaComponent,
+    AgregarProductoComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +46,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatTableModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatInputModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
