@@ -15,20 +15,27 @@ export class AgregarProductoComponent implements OnInit {
   constructor() {
   }
 
-  guardar() {
+  async guardar() {
     console.log("El producto: ", this.productoModel)
     console.log("Fotos", this.foto.nativeElement);
-    console.log("Fotos real", this.foto.nativeElement.files);
+    let archivos = this.foto.nativeElement.files;
     const fd = new FormData();
-    for (let x = 0; x < this.foto.nativeElement.files.length; x++) {
-      fd.append("foto", this.foto.nativeElement.files[x])
+    for (let x = 0; x < archivos.length; x++) {
+      fd.append(`foto_${x}`, archivos[x])
     }
 
     const payload = {
       producto: this.productoModel,
       fotos: fd,
     }
+
     console.log(payload)
+    const respuestaRaw = await fetch("http://localhost:3000/producto", {
+      method: "POST",
+      body: fd,
+    })
+    const respuesta = await respuestaRaw.text()
+    console.log(respuesta)
   }
 
   ngOnInit(): void {
