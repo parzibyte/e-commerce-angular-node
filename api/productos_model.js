@@ -1,12 +1,24 @@
 const conexion = require("./conexion")
 module.exports = {
-  insertar(nombre, precio) {
+  insertar(nombre, descripcion, precio) {
     return new Promise((resolve, reject) => {
       conexion.query(`insert into productos
-            (nombre, precio)
+            (nombre, descripcion, precio)
+            values
+            (?, ?, ?)`,
+        [nombre, descripcion, precio], (err, resultados) => {
+          if (err) reject(err);
+          else resolve(resultados.insertId);
+        });
+    });
+  },
+  agregarFoto(idProducto, nombreFoto) {
+    return new Promise((resolve, reject) => {
+      conexion.query(`insert into fotos_productos
+            (id_producto, foto)
             values
             (?, ?)`,
-        [nombre, precio], (err, resultados) => {
+        [idProducto, nombreFoto], (err, resultados) => {
           if (err) reject(err);
           else resolve(resultados.insertId);
         });
@@ -14,7 +26,7 @@ module.exports = {
   },
   obtener() {
     return new Promise((resolve, reject) => {
-      conexion.query(`select id, codigo_barras from productos`,
+      conexion.query(`select id, nombre, descripcion, precio from productos`,
         (err, resultados) => {
           if (err) reject(err);
           else resolve(resultados);

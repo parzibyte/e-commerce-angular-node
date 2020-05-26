@@ -20,7 +20,9 @@ import {VentasComponent} from './ventas/ventas.component';
 import {TiendaComponent} from './tienda/tienda.component';
 import {AgregarProductoComponent} from './agregar-producto/agregar-producto.component';
 import {MatInputModule} from "@angular/material/input";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {FormsModule} from "@angular/forms";
+import { LoadingButtonComponent } from './loading-button/loading-button.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import {FormsModule} from "@angular/forms";
     ClientesComponent,
     VentasComponent,
     TiendaComponent,
-    AgregarProductoComponent
+    AgregarProductoComponent,
+    LoadingButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import {FormsModule} from "@angular/forms";
     MatSnackBarModule,
     MatInputModule,
     FormsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

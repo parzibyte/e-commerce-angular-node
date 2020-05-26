@@ -22,5 +22,5 @@
 <br>
 <input #foto required id="fotos" multiple type="file">
 <p>
-  <button (click)="guardar()" mat-flat-button color="accent">Guardar</button>
+  <app-loading-button [cargando]="cargando" texto="Guardar" (click)="guardar()"></app-loading-button>
 </p>
