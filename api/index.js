@@ -70,6 +70,15 @@ app.get('/productos_con_fotos', async (req, res) => {
   res.json(productos);
 });
 
+app.get('/producto', async (req, res) => {
+  if (!req.query.id) {
+    res.end("not found");
+    return;
+  }
+  const producto = await productoModel.obtenerPorId(req.query.id);
+  producto.fotos = await productoModel.obtenerFotos(req.query.id);
+  res.json(producto);
+});
 
 // Una vez definidas nuestras rutas podemos iniciar el servidor
 app.listen(PUERTO, err => {

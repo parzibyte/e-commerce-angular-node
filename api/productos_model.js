@@ -42,9 +42,32 @@ module.exports = {
         });
     });
   },
+  obtenerFotos(idProducto) {
+    return new Promise((resolve, reject) => {
+      conexion.query(`select id_producto, foto FROM fotos_productos WHERE id_producto = ?`,
+        [idProducto],
+        (err, resultados) => {
+          if (err) reject(err);
+          else resolve(resultados);
+        });
+    });
+  },
+  obtenerProductoPorId(idProducto) {
+    return new Promise((resolve, reject) => {
+      conexion.query(`select id, nombre, descripcion, precio FROM productos WHERE id = ?`,
+        [idProducto],
+        (err, resultados) => {
+          if (err) reject(err);
+          else {
+            const producto = resultados.length > 0 ? resultados[0] : {};
+            resolve(producto);
+          }
+        });
+    });
+  },
   obtenerPorId(id) {
     return new Promise((resolve, reject) => {
-      conexion.query(`select id, nombre, precio from productos where id = ?`,
+      conexion.query(`select id, nombre,descripcion, precio from productos where id = ?`,
         [id],
         (err, resultados) => {
           console.log({resultados});

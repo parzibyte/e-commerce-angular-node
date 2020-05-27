@@ -3,29 +3,27 @@
     <mat-grid-tile>
       <div class="izquierda">
 
-        <img class="imagen-izquierda" src="https://picsum.photos/500" alt="">
-        <img class="imagen-izquierda" src="https://picsum.photos/500" alt="">
-        <img class="imagen-izquierda" src="https://picsum.photos/500" alt="">
-        <img class="imagen-izquierda" src="https://picsum.photos/500" alt="">
+        <img *ngFor="let foto of producto.fotos; let i = index" (mouseenter)="seleccionarImagen(i)"
+             class="imagen-izquierda"
+             [class.seleccionada]="i==indiceSeleccionado"
+             [src]="resolverFoto(foto.foto)" alt="Foto">
       </div>
       <div>
-        <img src="https://picsum.photos/1000" alt="">
+        <img *ngIf="fotoSeleccionada" [src]="resolverFoto(fotoSeleccionada)" alt="">
       </div>
       <br>
     </mat-grid-tile>
     <mat-grid-tile class="detalles">
-
-      <h1 class="mat-display-2">Nombre del producto</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, ab aliquid cumque debitis doloribus et
-        exercitationem facilis fuga id illum ipsa ipsam ipsum laboriosam officia officiis quaerat quas similique
-        voluptate!</p>
+      <h1 class="mat-display-2">{{producto.nombre}}</h1>
+      <p>{{producto.descripcion}}</p>
       <strong>Precio</strong>
-      <h1 class="mat-display-2">$123.45</h1>
-      <button mat-raised-button color="primary">
+      <h1 class="mat-display-2">{{producto.precio | currency}}</h1>
+      <button class="carrito" mat-raised-button color="accent">
         Agregar al carrito
       </button>
-      <!--      Todo-->
-      <strong>Falta agregar un botón que diga "Seguir comprando"</strong>
+      <a routerLink="/tienda" class="comprar" mat-raised-button color="primary">
+        Seguir comprando
+      </a>
     </mat-grid-tile>
   </mat-grid-list>
 </mat-card>

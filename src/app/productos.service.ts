@@ -13,10 +13,11 @@ export class ProductosService {
   public async agregarProducto(producto: Producto) {
     return await this.http.post("/producto", producto);
   }
+
   /*
   El formdata debe tener el id del producto
    */
-  public async agregarFotosDeProducto(fotos:FormData) {
+  public async agregarFotosDeProducto(fotos: FormData) {
     return await this.http.formdata("/fotos_producto", fotos);
   }
 
@@ -26,5 +27,9 @@ export class ProductosService {
 
   public async obtenerProductosConFotos() {
     return await this.http.get("/productos_con_fotos");
+  }
+
+  public async obtenerProductoConFotosPorId(idProducto) {
+    return await this.http.get("/producto?id=".concat(idProducto));
   }
 }
