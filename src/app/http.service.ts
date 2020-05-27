@@ -28,4 +28,9 @@ export class HttpService {
     });
     return await respuestaRaw.json();
   }
+  async get(ruta: string) {
+    // Por defecto se hace una petición GET
+    const respuestaRaw = await fetch(this.rutaServidor + ruta);
+    return await respuestaRaw.json();
+  }
 }

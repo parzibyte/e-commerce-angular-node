@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {ProductosService} from "../productos.service";
 
 @Component({
   selector: 'app-productos',
@@ -8,10 +9,14 @@ import {Router} from "@angular/router";
 })
 export class ProductosComponent implements OnInit {
 
-  constructor(private router: Router) {
+  public productos = [];
+  public columnas = ['nombre', 'descripcion', 'precio'];
+
+  constructor(private router: Router, private productosService: ProductosService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.productos = await this.productosService.obtenerProductos();
   }
 
   navegarAFormulario() {

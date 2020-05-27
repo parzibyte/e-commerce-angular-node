@@ -19,4 +19,8 @@ export class ProductosService {
   public async agregarFotosDeProducto(fotos:FormData) {
     return await this.http.formdata("/fotos_producto", fotos);
   }
+
+  public async obtenerProductos() {
+    return await this.http.get("/productos");
+  }
 }

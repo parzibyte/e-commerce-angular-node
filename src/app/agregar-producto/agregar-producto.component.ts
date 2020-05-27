@@ -32,11 +32,12 @@ export class AgregarProductoComponent implements OnInit {
     fd.append("idProducto", idProductoGuardado);
     const respuesta = await this.productosService.agregarFotosDeProducto(fd);
     console.log({respuesta})
-    this.snackBar.open("Producto guardado", "acción", {
+    this.snackBar.open("Producto guardado", "", {
       duration: 1500,
       horizontalPosition: "start",
       verticalPosition: "top",
-    })
+    });
+
     this.cargando = false;
     this.productoModel = new Producto("", "");
     this.foto.nativeElement.value = "";

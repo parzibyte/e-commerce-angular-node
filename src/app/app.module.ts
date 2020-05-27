@@ -22,7 +22,7 @@ import {AgregarProductoComponent} from './agregar-producto/agregar-producto.comp
 import {MatInputModule} from "@angular/material/input";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {FormsModule} from "@angular/forms";
-import { LoadingButtonComponent } from './loading-button/loading-button.component';
+import {LoadingButtonComponent} from './loading-button/loading-button.component';
 
 @NgModule({
   declarations: [
