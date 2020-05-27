@@ -33,6 +33,15 @@ module.exports = {
         });
     });
   },
+  obtenerConFotos() {
+    return new Promise((resolve, reject) => {
+      conexion.query(`select productos.*,fotos_productos.foto from productos inner join fotos_productos on productos.id = fotos_productos.id_producto group by productos.id`,
+        (err, resultados) => {
+          if (err) reject(err);
+          else resolve(resultados);
+        });
+    });
+  },
   obtenerPorId(id) {
     return new Promise((resolve, reject) => {
       conexion.query(`select id, nombre, precio from productos where id = ?`,

@@ -16,6 +16,8 @@ app.use(cors({
   origin: DIRECTORIO_PERMITIDO_CORS
 }));
 app.use(express.json())
+// Fotos
+app.use("/foto_producto", express.static(DIRECTORIO_FOTOS));
 
 if (!fs.existsSync(DIRECTORIO_FOTOS)) {
   fs.mkdirSync(DIRECTORIO_FOTOS);
@@ -61,6 +63,10 @@ app.post('/producto', async (req, res) => {
 
 app.get('/productos', async (req, res) => {
   const productos = await productoModel.obtener();
+  res.json(productos);
+});
+app.get('/productos_con_fotos', async (req, res) => {
+  const productos = await productoModel.obtenerConFotos();
   res.json(productos);
 });
 

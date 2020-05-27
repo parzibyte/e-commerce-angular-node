@@ -1,12 +1,12 @@
 <mat-card>
   <div style="">
     <div class="contenedor-imagen">
-      <img src="assets/d.jpeg" alt="">
+      <img src="{{resolverRuta()}}" alt="">
     </div>
     <div style="display: inline-block; vertical-align: top">
-      <h2>Nombre del producto</h2>
-      <h1>$123.45</h1>
-      <button mat-stroked-button color="warn">Ver detalles
+      <h2>{{producto.nombre}}</h2>
+      <h1>{{producto.precio | currency}}</h1>
+      <button (click)="detalles()" mat-stroked-button color="warn">Ver detalles
         <mat-icon>arrow_right</mat-icon>
       </button>
     </div>

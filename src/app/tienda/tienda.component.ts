@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ProductosService} from "../productos.service";
 
 @Component({
   selector: 'app-tienda',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tienda.component.css']
 })
 export class TiendaComponent implements OnInit {
+  public productos = [];
 
-  constructor() { }
+  constructor(private productosService: ProductosService) {
+  }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.productos = await this.productosService.obtenerProductosConFotos();
   }
 
 }

@@ -23,4 +23,8 @@ export class ProductosService {
   public async obtenerProductos() {
     return await this.http.get("/productos");
   }
+
+  public async obtenerProductosConFotos() {
+    return await this.http.get("/productos_con_fotos");
+  }
 }
