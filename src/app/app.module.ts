@@ -23,6 +23,11 @@ import {MatInputModule} from "@angular/material/input";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {FormsModule} from "@angular/forms";
 import {LoadingButtonComponent} from './loading-button/loading-button.component';
+import {TarjetaProductoComponent} from './tarjeta-producto/tarjeta-producto.component';
+import {MatCardMdImage, MatCardModule} from "@angular/material/card";
+import {MatGridListModule} from "@angular/material/grid-list";
+import { DetalleDeProductoComponent } from './detalle-de-producto/detalle-de-producto.component';
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -32,7 +37,9 @@ import {LoadingButtonComponent} from './loading-button/loading-button.component'
     VentasComponent,
     TiendaComponent,
     AgregarProductoComponent,
-    LoadingButtonComponent
+    LoadingButtonComponent,
+    TarjetaProductoComponent,
+    DetalleDeProductoComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +59,9 @@ import {LoadingButtonComponent} from './loading-button/loading-button.component'
     MatInputModule,
     FormsModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatGridListModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

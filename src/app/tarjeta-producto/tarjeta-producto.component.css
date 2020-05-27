@@ -1,0 +1,13 @@
+.mat-card {
+  margin-bottom: 10px !important;
+}
+
+img {
+  max-width: 150px;
+  height: auto;
+}
+.contenedor-imagen{
+  padding: 10px;
+  display: inline-block;
+}
+
