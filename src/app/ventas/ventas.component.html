@@ -1,1 +1,26 @@
-<p>ventas works!</p>
+<h1>Ventas</h1>
+
+<table class="mat-elevation-z13" *ngIf="ventas.length>0" mat-table [dataSource]="ventas">
+  <ng-container matColumnDef="cliente">
+    <mat-header-cell *matHeaderCellDef>Cliente</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.nombre}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="direccion">
+    <mat-header-cell *matHeaderCellDef>Dirección de envío</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.direccion}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="total">
+    <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.total | currency}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="detalles">
+    <mat-header-cell *matHeaderCellDef>Detalles</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-icon-button color="accent">
+        <mat-icon>check</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+</table>

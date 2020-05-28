@@ -17,7 +17,7 @@
         <button mat-menu-item>
           <strong>Total: {{total() | currency}}</strong>
         </button>
-        <a *ngIf="productos.length > 0" mat-menu-item href="#">
+        <a *ngIf="productos.length > 0" mat-menu-item routerLink="/terminar_compra">
           <mat-icon>shopping_cart</mat-icon>
           Terminar compra</a>
       </mat-menu>

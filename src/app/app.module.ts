@@ -30,6 +30,8 @@ import {DetalleDeProductoComponent} from './detalle-de-producto/detalle-de-produ
 import {MatChipsModule} from "@angular/material/chips";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatMenuModule} from "@angular/material/menu";
+import { TerminarCompraComponent } from './terminar-compra/terminar-compra.component';
+import {MatStepperModule} from "@angular/material/stepper";
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import {MatMenuModule} from "@angular/material/menu";
     AgregarProductoComponent,
     LoadingButtonComponent,
     TarjetaProductoComponent,
-    DetalleDeProductoComponent
+    DetalleDeProductoComponent,
+    TerminarCompraComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import {MatMenuModule} from "@angular/material/menu";
     MatChipsModule,
     MatBadgeModule,
     MatMenuModule,
+    MatStepperModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

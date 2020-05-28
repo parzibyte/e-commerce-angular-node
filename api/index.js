@@ -2,6 +2,9 @@ const express = require("express"),
   path = require("path"),
   app = express(),
   productoModel = require("./productos_model"),
+  clienteModel = require("./clientes_model"),
+  ventaModel = require("./ventas_model"),
+  productoVendidoModel = require("./producto_vendido_model"),
   formidable = require("formidable"),
   session = require("express-session"),
   cors = require("cors"),
@@ -43,6 +46,32 @@ app.use((req, res, next) => {
   res.set("Access-Control-Allow-Origin", DIRECTORIO_PERMITIDO_CORS);
   res.set("Access-Control-Allow-Headers", "Content-Type");
   next();
+});
+//Todo: separar rutas
+/*
+Compras
+ */
+app.get("/ventas", async (req, res) => {
+  const ventas = await ventaModel.obtener();
+  res.json(ventas);
+});
+app.post("/compra", async (req, res) => {
+  const {nombre, direccion} = req.body;
+  let total = 0;
+
+  const carrito = req.session.carrito || [];
+  carrito.forEach(p => total += p.precio);
+  const idCliente = await clienteModel.insertar(nombre, direccion);
+  const idVenta = await ventaModel.insertar(idCliente, total);
+  // usamos for en lugar de foreach por el await
+  for (let m = 0; m < carrito.length; m++) {
+    const productoActual = carrito[m];
+    await productoVendidoModel.insertar(idVenta, productoActual.id);
+  }
+  // Limpiar carrito...
+  req.session.carrito = [];
+  // !listo!
+  res.json(true);
 });
 app.get("/carrito", (req, res) => {
   res.json(req.session.carrito || []);
