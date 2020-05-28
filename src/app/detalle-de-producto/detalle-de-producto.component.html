@@ -18,8 +18,20 @@
       <p>{{producto.descripcion}}</p>
       <strong>Precio</strong>
       <h1 class="mat-display-2">{{producto.precio | currency}}</h1>
-      <button class="carrito" mat-raised-button color="accent">
+      <mat-chip-list *ngIf="yaExiste">
+        <mat-chip color="warn" selected>
+          <mat-icon>check</mat-icon>
+          En el carrito de compras
+        </mat-chip>
+      </mat-chip-list>
+      <button *ngIf="!yaExiste" (click)="agregarAlCarrito()" class="carrito" mat-raised-button color="accent">
+
+        <mat-icon>add</mat-icon>
         Agregar al carrito
+      </button>
+      <button *ngIf="yaExiste" (click)="quitarDelCarrito()" class="carrito" mat-raised-button color="accent">
+        <mat-icon>delete</mat-icon>
+        Quitar del carrito
       </button>
       <a routerLink="/tienda" class="comprar" mat-raised-button color="primary">
         Seguir comprando

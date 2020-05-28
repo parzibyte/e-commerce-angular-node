@@ -26,8 +26,10 @@ import {LoadingButtonComponent} from './loading-button/loading-button.component'
 import {TarjetaProductoComponent} from './tarjeta-producto/tarjeta-producto.component';
 import {MatCardMdImage, MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
-import { DetalleDeProductoComponent } from './detalle-de-producto/detalle-de-producto.component';
+import {DetalleDeProductoComponent} from './detalle-de-producto/detalle-de-producto.component';
 import {MatChipsModule} from "@angular/material/chips";
+import {MatBadgeModule} from "@angular/material/badge";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import {MatChipsModule} from "@angular/material/chips";
     MatCardModule,
     MatGridListModule,
     MatChipsModule,
+    MatBadgeModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

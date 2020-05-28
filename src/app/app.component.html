@@ -7,6 +7,20 @@
       <span>
         Mi tienda&nbsp;
       </span>
+      <span class="example-fill-remaining-space"></span>
+      <button mat-raised-button [matMenuTriggerFor]="menu">
+        <span style="margin-right: 10px" [matBadge]="productos.length+''" matBadgeOverlap="false"
+              matBadgePosition="below after">Carrito de compras</span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let p of productos;">{{p.nombre}}  {{p.precio | currency}}</button>
+        <button mat-menu-item>
+          <strong>Total: {{total() | currency}}</strong>
+        </button>
+        <a *ngIf="productos.length > 0" mat-menu-item href="#">
+          <mat-icon>shopping_cart</mat-icon>
+          Terminar compra</a>
+      </mat-menu>
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-sidenav-container class="contenido">

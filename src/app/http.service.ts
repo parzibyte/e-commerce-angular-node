@@ -17,6 +17,7 @@ export class HttpService {
         "Content-Type": "application/json",
       },
       method: "POST",
+      credentials: "include",
     });
     return await respuestaRaw.json();
   }
@@ -28,9 +29,12 @@ export class HttpService {
     });
     return await respuestaRaw.json();
   }
+
   async get(ruta: string) {
     // Por defecto se hace una petición GET
-    const respuestaRaw = await fetch(this.rutaServidor + ruta);
+    const respuestaRaw = await fetch(this.rutaServidor + ruta,{
+      credentials: "include",
+    });
     return await respuestaRaw.json();
   }
 }

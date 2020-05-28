@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductosService} from "../productos.service";
 import {ActivatedRoute} from "@angular/router";
 import {Producto} from "../producto";
+import {CarritoService} from "../carrito.service";
 
 @Component({
   selector: 'app-detalle-de-producto',
@@ -10,6 +11,7 @@ import {Producto} from "../producto";
 })
 export class DetalleDeProductoComponent implements OnInit {
   public producto = {
+    id: 0,
     fotos: [],
     nombre: "",
     descripcion: "",
@@ -17,8 +19,9 @@ export class DetalleDeProductoComponent implements OnInit {
   };
   public fotoSeleccionada: string;
   public indiceSeleccionado = 0;
+  public yaExiste: boolean;
 
-  constructor(private productosService: ProductosService, private activatedRoute: ActivatedRoute) {
+  constructor(private carritoService: CarritoService, private productosService: ProductosService, private activatedRoute: ActivatedRoute) {
   }
 
   public resolverFoto(foto) {
@@ -30,12 +33,34 @@ export class DetalleDeProductoComponent implements OnInit {
     this.fotoSeleccionada = this.producto.fotos[this.indiceSeleccionado].foto;
   }
 
+  public async quitarDelCarrito(){
+    const {id} = this.producto;
+    const respuesta = await this.carritoService.quitarProducto(id);
+    console.log({respuesta})
+    this.refrescarEstado();
+  }
+
+  public async agregarAlCarrito() {
+    const {id} = this.producto;
+    const respuesta = await this.carritoService.agregarAlCarrito(id);
+    console.log({respuesta})
+    this.refrescarEstado();
+  }
+
+  async refrescarEstado() {
+    const id = this.producto.id;
+    this.yaExiste = await this.carritoService.existeEnCarrito(id);
+    console.log(this.yaExiste);
+
+  }
+
   async ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get("id")
     this.producto = await this.productosService.obtenerProductoConFotosPorId(id);
     if (this.producto.fotos.length >= 0) {
       this.seleccionarImagen(0);
     }
+    this.refrescarEstado();
   }
 
 }

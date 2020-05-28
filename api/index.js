@@ -3,25 +3,80 @@ const express = require("express"),
   app = express(),
   productoModel = require("./productos_model"),
   formidable = require("formidable"),
+  session = require("express-session"),
   cors = require("cors"),
   fs = require("fs");
 const {v4: uuidv4} = require("uuid")
+
+
+const indiceDeProducto = (carrito, idProducto) => {
+  return carrito.findIndex(productoDentroDelCarrito => productoDentroDelCarrito.id === idProducto);
+}
+const existeProducto = (carrito, producto) => {
+  return indiceDeProducto(carrito, producto.id) !== -1;
+}
 
 
 const DIRECTORIO_PERMITIDO_CORS = "http://localhost:4200",
   DIRECTORIO_FOTOS = path.join(__dirname, "fotos_productos"),
   PUERTO = 3000;
 
-app.use(cors({
-  origin: DIRECTORIO_PERMITIDO_CORS
-}));
+// app.use(cors({
+//   origin: DIRECTORIO_PERMITIDO_CORS,
+//   credentials: true,
+// }));
+// app.all("*", cors());
 app.use(express.json())
+app.use(session({
+  secret: "987f4bd6d4315c20b2ec70a46ae846d19d0ce563450c02c5b1bc71d5d580060b",
+  saveUninitialized: true,
+  resave: true,
+}))
 // Fotos
 app.use("/foto_producto", express.static(DIRECTORIO_FOTOS));
 
 if (!fs.existsSync(DIRECTORIO_FOTOS)) {
   fs.mkdirSync(DIRECTORIO_FOTOS);
 }
+app.use((req, res, next) => {
+  res.set("Access-Control-Allow-Credentials", "true");
+  res.set("Access-Control-Allow-Origin", DIRECTORIO_PERMITIDO_CORS);
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+app.get("/carrito", (req, res) => {
+  res.json(req.session.carrito || []);
+})
+// No está en un DELETE porque no permite datos en el body ._.
+app.post("/carrito/eliminar", async (req, res) => {
+  const idProducto = req.body.id;
+  const indice = indiceDeProducto(req.session.carrito, idProducto);
+  if (indice >= 0 && req.session.carrito) {
+    req.session.carrito.splice(indice, 1);
+  }
+  res.json(true);
+});
+app.post("/carrito/existe", async (req, res) => {
+  const idProducto = req.body.id;
+  const producto = await productoModel.obtenerPorId(idProducto);
+  const existe = existeProducto(req.session.carrito || [], producto);
+  res.json(existe);
+});
+
+app.post("/carrito/agregar", async (req, res) => {
+  const idProducto = req.body.id;
+  const producto = await productoModel.obtenerPorId(idProducto);
+  if (!req.session.carrito) {
+    req.session.carrito = [];
+  }
+  // por el momento no se pueden llevar más de dos productos iguales
+  if (existeProducto(req.session.carrito, producto)) {
+    res.json(true);
+    return;
+  }
+  req.session.carrito.push(producto);
+  res.json(req.body);
+});
 
 
 app.post('/fotos_producto', (req, res) => {
@@ -32,7 +87,6 @@ app.post('/fotos_producto', (req, res) => {
 
   form.parse(req, async (err, fields, files) => {
     const idProducto = fields.idProducto;
-    console.log({idProducto})
     for (let clave in files) {
       const file = files[clave];
       const nombreArchivo = file.name;
