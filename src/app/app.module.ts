@@ -32,6 +32,7 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatMenuModule} from "@angular/material/menu";
 import { TerminarCompraComponent } from './terminar-compra/terminar-compra.component';
 import {MatStepperModule} from "@angular/material/stepper";
+import { DetalleDeVentaComponent } from './detalle-de-venta/detalle-de-venta.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {MatStepperModule} from "@angular/material/stepper";
     LoadingButtonComponent,
     TarjetaProductoComponent,
     DetalleDeProductoComponent,
-    TerminarCompraComponent
+    TerminarCompraComponent,
+    DetalleDeVentaComponent
   ],
   imports: [
     BrowserModule,

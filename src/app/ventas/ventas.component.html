@@ -16,8 +16,8 @@
   <ng-container matColumnDef="detalles">
     <mat-header-cell *matHeaderCellDef>Detalles</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button mat-icon-button color="accent">
-        <mat-icon>check</mat-icon>
+      <button mat-icon-button (click)="verDetalle(element.id)" color="accent">
+        <mat-icon>pageview</mat-icon>
       </button>
     </mat-cell>
   </ng-container>

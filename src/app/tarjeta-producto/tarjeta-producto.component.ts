@@ -21,7 +21,6 @@ export class TarjetaProductoComponent implements OnInit {
 
   public detalles() {
     this.router.navigate(["/producto/detalle", this.producto.id])
-    console.log("Detalles", this.producto)
   }
 
 }

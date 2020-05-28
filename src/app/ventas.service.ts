@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from "./http.service";
 import {Producto} from "./producto";
 
@@ -13,5 +13,9 @@ export class VentasService {
 
   public async obtenerVentas() {
     return await this.http.get("/ventas");
+  }
+
+  public async obtenerDetalleDeVenta(idVenta) {
+    return await this.http.get("/detalle_venta?id=".concat(idVenta));
   }
 }

@@ -51,6 +51,16 @@ app.use((req, res, next) => {
 /*
 Compras
  */
+app.get("/detalle_venta", async (req, res) => {
+  if (!req.query.id) {
+    res.end("Not found");
+    return;
+  }
+  const idVenta = req.query.id;
+  const venta = await ventaModel.obtenerPorId(idVenta);
+  venta.productos = await ventaModel.obtenerProductosVendidos(idVenta);
+  res.json(venta);
+})
 app.get("/ventas", async (req, res) => {
   const ventas = await ventaModel.obtener();
   res.json(ventas);

@@ -1,0 +1,25 @@
+<mat-card>
+  <h2>
+    <mat-icon>person</mat-icon>
+    {{venta.nombre}}</h2>
+  <h2>
+    <mat-icon>local_shipping</mat-icon>
+    {{venta.direccion}}</h2>
+  <h2>
+    <mat-icon>monetization_on</mat-icon>
+    {{venta.total | currency}}</h2>
+  <table *ngIf="venta.productos.length>0" mat-table [dataSource]="venta.productos">
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombre}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="precio">
+      <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.precio | currency}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+  </table>
+  <br>
+  <a routerLink="/ventas" mat-raised-button color="accent">Volver</a>
+</mat-card>

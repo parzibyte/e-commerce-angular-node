@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {VentasService} from "../ventas.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-ventas',
@@ -8,7 +9,7 @@ import {VentasService} from "../ventas.service";
 })
 export class VentasComponent implements OnInit {
 
-  constructor(private ventasService: VentasService) {
+  constructor(private ventasService: VentasService, private router:Router) {
   }
 
   public ventas = [];
@@ -17,6 +18,11 @@ export class VentasComponent implements OnInit {
   async ngOnInit() {
     this.ventas = await this.ventasService.obtenerVentas();
     console.log(this.ventas);
+  }
+
+  public verDetalle(id) {
+    console.log({id})
+    this.router.navigate(["/detalle-venta", id])
   }
 
 
