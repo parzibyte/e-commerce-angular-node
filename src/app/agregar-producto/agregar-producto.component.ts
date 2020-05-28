@@ -20,18 +20,29 @@ export class AgregarProductoComponent implements OnInit {
   public cargando = false;
 
   async guardar() {
+    if (!this.productoModel.nombre) {
+      return alert("Escribe un nombre");
+    }
+    if (!this.productoModel.descripcion) {
+      return alert("Escribe la descripción");
+    }
+    if (!this.productoModel.precio) {
+      return alert("Escribe el precio");
+    }
+    let archivos = this.foto.nativeElement.files;
+    if (!archivos.length) {
+      return alert("Selecciona al menos una foto");
+    }
     this.cargando = true;
     // Guardamos producto
     const idProductoGuardado = await this.productosService.agregarProducto(this.productoModel);
     // Y luego las fotos
-    let archivos = this.foto.nativeElement.files;
     const fd = new FormData();
     for (let x = 0; x < archivos.length; x++) {
       fd.append(`foto_${x}`, archivos[x])
     }
     fd.append("idProducto", idProductoGuardado);
     const respuesta = await this.productosService.agregarFotosDeProducto(fd);
-    console.log({respuesta})
     this.snackBar.open("Producto guardado", "", {
       duration: 1500,
       horizontalPosition: "start",

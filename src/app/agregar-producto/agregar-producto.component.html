@@ -22,7 +22,7 @@
   </p>
   <label for="fotos">Fotos</label>
   <br>
-  <input #foto required id="fotos" multiple type="file">
+  <input accept="image/png,image/jpeg" #foto required id="fotos" multiple type="file">
   <p>
     <app-loading-button [cargando]="cargando" texto="Guardar" (click)="guardar()"></app-loading-button>
     <a routerLink="/productos" mat-raised-button color="primary" style="margin-left: 10px">Volver</a>
