@@ -1,17 +1,19 @@
-#Instalación
+# Instalación
 ## Requisitos
 * Angular CLI
 * Node y NPM
 * MySQL / MariaDB
 ## Pasos
 1. Clonar o descargar este repositorio. En la terminal navegar al directorio y ejecutar ``npm install`` para instalar las dependencias de Angular y cosas del lado del cliente
-2. Ahora navegar a la carpeta api y ejecutar lo mismo: ``npm install``
+2. Ahora navegar a la carpeta **api** y ejecutar lo mismo: ``npm install``
 3. Crear base de datos y usuario en MySQL
-4. Importar esquema.sql a la base de datos recién creada
-5. Configurar credenciales de la base de datos en conexion.js
+4. Importar **esquema.sql** a la base de datos recién creada
+5. Configurar credenciales de la base de datos en **conexion.js** (está dentro de **api**)
 6. En la carpeta raíz ejecutar ``ng serve``
-7. Dentro de api ejecutar ``node index.js`` 
+7. Abrir otra terminal, y dentro de **api** ejecutar ``node index.js`` 
 8. Navegar a localhost:4200
+
+__sordid details following...__
 
 # ECommerceAngularNode
 
