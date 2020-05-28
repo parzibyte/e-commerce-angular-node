@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CarritoService} from "./carrito.service";
+import {DataSharingService} from "./data-sharing.service";
 
 @Component({
   selector: 'app-root',
@@ -10,14 +11,17 @@ export class AppComponent implements OnInit {
   title = 'e-commerce-angular-node';
   public productos = [];
 
-  constructor(private carritoService: CarritoService) {
+  constructor(private carritoService: CarritoService, private dataSharingService: DataSharingService) {
+    // Comunicación entre componentes
+    this.dataSharingService.currentMessage.subscribe(mensaje => {
+      if (mensaje == "car_updated") {
+        this.refrescarCarrito();
+      }
+    })
   }
 
   public async refrescarCarrito() {
     this.productos = await this.carritoService.obtenerProductos();
-    console.log("Productos:");
-    console.log(this.productos)
-
   }
 
   public total() {

@@ -3,6 +3,7 @@ import {ProductosService} from "../productos.service";
 import {ActivatedRoute} from "@angular/router";
 import {Producto} from "../producto";
 import {CarritoService} from "../carrito.service";
+import {DataSharingService} from "../data-sharing.service";
 
 @Component({
   selector: 'app-detalle-de-producto',
@@ -21,7 +22,8 @@ export class DetalleDeProductoComponent implements OnInit {
   public indiceSeleccionado = 0;
   public yaExiste: boolean;
 
-  constructor(private carritoService: CarritoService, private productosService: ProductosService, private activatedRoute: ActivatedRoute) {
+  constructor(private carritoService: CarritoService, private productosService: ProductosService, private activatedRoute: ActivatedRoute, private dataSharingService: DataSharingService) {
+
   }
 
   public resolverFoto(foto) {
@@ -33,7 +35,7 @@ export class DetalleDeProductoComponent implements OnInit {
     this.fotoSeleccionada = this.producto.fotos[this.indiceSeleccionado].foto;
   }
 
-  public async quitarDelCarrito(){
+  public async quitarDelCarrito() {
     const {id} = this.producto;
     const respuesta = await this.carritoService.quitarProducto(id);
     console.log({respuesta})
@@ -50,8 +52,8 @@ export class DetalleDeProductoComponent implements OnInit {
   async refrescarEstado() {
     const id = this.producto.id;
     this.yaExiste = await this.carritoService.existeEnCarrito(id);
-    console.log(this.yaExiste);
-
+    // Comunicación entre componentes
+    this.dataSharingService.changeMessage("car_updated");
   }
 
   async ngOnInit() {
