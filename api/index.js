@@ -1,3 +1,5 @@
+// Cargar valores del entorno
+require("dotenv").config();
 const express = require("express"),
   path = require("path"),
   app = express(),
@@ -7,7 +9,6 @@ const express = require("express"),
   productoVendidoModel = require("./producto_vendido_model"),
   formidable = require("formidable"),
   session = require("express-session"),
-  cors = require("cors"),
   fs = require("fs");
 const {v4: uuidv4} = require("uuid")
 
@@ -25,14 +26,9 @@ const DIRECTORIO_PERMITIDO_CORS = "http://localhost:4200",
   DIRECTORIO_DIST = path.join(__dirname, "dist"),
   PUERTO = 3000;
 
-// app.use(cors({
-//   origin: DIRECTORIO_PERMITIDO_CORS,
-//   credentials: true,
-// }));
-// app.all("*", cors());
 app.use(express.json())
 app.use(session({
-  secret: "987f4bd6d4315c20b2ec70a46ae846d19d0ce563450c02c5b1bc71d5d580060b",
+  secret: process.env.SESSION_KEY,
   saveUninitialized: true,
   resave: true,
 }))
