@@ -35,10 +35,28 @@ module.exports = {
   },
   obtenerConFotos() {
     return new Promise((resolve, reject) => {
-      conexion.query(`select productos.*,fotos_productos.foto from productos inner join fotos_productos on productos.id = fotos_productos.id_producto group by productos.id`,
+      conexion.query(`select * from productos`,
+        async (err, resultados) => {
+          if (err) reject(err);
+          else {
+            /*
+              Si existe un dios, que me disculpe por este no-optimizado e ineficiente fragmento de código
+             */
+            for (let x = 0; x < resultados.length; x++) {
+              resultados[x].foto = await this.obtenerPrimeraFoto(resultados[x].id);
+            }
+            resolve(resultados);
+          }
+        });
+    });
+  },
+  obtenerPrimeraFoto(idProducto) {
+    return new Promise((resolve, reject) => {
+      conexion.query(`select foto from fotos_productos WHERE id_producto = ? limit 1`,
+        [idProducto],
         (err, resultados) => {
           if (err) reject(err);
-          else resolve(resultados);
+          else resolve(resultados[0].foto);
         });
     });
   },
