@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
   //TODO: put it in a constant
-  rutaServidor = "http://localhost:3000"
+
+  rutaServidor = environment.baseUrl;
 
   constructor() {
   }
@@ -32,7 +34,7 @@ export class HttpService {
 
   async get(ruta: string) {
     // Por defecto se hace una petición GET
-    const respuestaRaw = await fetch(this.rutaServidor + ruta,{
+    const respuestaRaw = await fetch(this.rutaServidor + ruta, {
       credentials: "include",
     });
     return await respuestaRaw.json();

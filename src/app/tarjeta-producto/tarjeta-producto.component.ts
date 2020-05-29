@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-tarjeta-producto',
@@ -16,7 +17,8 @@ export class TarjetaProductoComponent implements OnInit {
   }
 
   public resolverRuta() {
-    return `http://localhost:3000/foto_producto/${this.producto.foto}`;
+    const baseUrl = environment.baseUrl;
+    return `${baseUrl}/foto_producto/${this.producto.foto}`;
   }
 
   public detalles() {

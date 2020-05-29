@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Producto} from "../producto";
 import {CarritoService} from "../carrito.service";
 import {DataSharingService} from "../data-sharing.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-detalle-de-producto',
@@ -27,7 +28,8 @@ export class DetalleDeProductoComponent implements OnInit {
   }
 
   public resolverFoto(foto) {
-    return `http://localhost:3000/foto_producto/${foto}`;
+    const baseUrl = environment.baseUrl;
+    return `${baseUrl}/foto_producto/${foto}`;
   }
 
   public seleccionarImagen(indice) {
