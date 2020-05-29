@@ -13,6 +13,14 @@
     <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.precio | currency}}</mat-cell>
   </ng-container>
+  <ng-container matColumnDef="eliminar">
+    <mat-header-cell *matHeaderCellDef>Eliminar</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button (click)="eliminar(element)" mat-icon-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
   <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
   <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
 </table>

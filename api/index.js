@@ -48,7 +48,18 @@ app.use((req, res, next) => {
   res.set("Access-Control-Allow-Credentials", "true");
   res.set("Access-Control-Allow-Origin", DIRECTORIO_PERMITIDO_CORS);
   res.set("Access-Control-Allow-Headers", "Content-Type");
+  res.set("Access-Control-Allow-Methods", "DELETE");
   next();
+});
+app.delete("/producto", async (req, res) => {
+
+  if (!req.query.id) {
+    res.end("Not found");
+    return;
+  }
+  const idProducto = req.query.id;
+  await productoModel.eliminar(idProducto);
+  res.json(true);
 });
 //Todo: separar rutas
 /*

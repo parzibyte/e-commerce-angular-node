@@ -1,4 +1,6 @@
 const conexion = require("./conexion")
+const fs = require("fs");
+const path = require("path");
 module.exports = {
   insertar(nombre, descripcion, precio) {
     return new Promise((resolve, reject) => {
@@ -94,7 +96,11 @@ module.exports = {
     });
   },
   eliminar(id) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+      const fotos = await this.obtenerFotos(id);
+      for (let m = 0; m < fotos.length; m++) {
+        await fs.unlinkSync(path.join(__dirname, "fotos_productos", fotos[m].foto));
+      }
       conexion.query(`delete from productos
             where id = ?`,
         [id],

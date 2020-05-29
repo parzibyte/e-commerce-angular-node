@@ -10,12 +10,24 @@ import {ProductosService} from "../productos.service";
 export class ProductosComponent implements OnInit {
 
   public productos = [];
-  public columnas = ['nombre', 'descripcion', 'precio'];
+  public columnas = ['nombre', 'descripcion', 'precio', 'eliminar'];
 
   constructor(private router: Router, private productosService: ProductosService) {
   }
 
+  async eliminar(producto) {
+    if (!confirm("¿Realmente lo quieres eliminar<?")) {
+      return;
+    }
+    await this.productosService.eliminarProducto(producto.id);
+    await this.obtenerProductos();
+  }
+
   async ngOnInit() {
+    await this.obtenerProductos();
+  }
+
+  async obtenerProductos() {
     this.productos = await this.productosService.obtenerProductos();
   }
 

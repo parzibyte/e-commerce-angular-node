@@ -10,6 +10,10 @@ export class ProductosService {
   constructor(private http: HttpService) {
   }
 
+  public async eliminarProducto(idProducto) {
+    return await this.http.delete("/producto?id=".concat(idProducto));
+  }
+
   public async agregarProducto(producto: Producto) {
     return await this.http.post("/producto", producto);
   }

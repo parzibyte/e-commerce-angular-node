@@ -5,8 +5,6 @@ import {environment} from "../environments/environment";
   providedIn: 'root'
 })
 export class HttpService {
-  //TODO: put it in a constant
-
   rutaServidor = environment.baseUrl;
 
   constructor() {
@@ -36,6 +34,14 @@ export class HttpService {
     // Por defecto se hace una petición GET
     const respuestaRaw = await fetch(this.rutaServidor + ruta, {
       credentials: "include",
+    });
+    return await respuestaRaw.json();
+  }
+
+  async delete(ruta: string) {
+    const respuestaRaw = await fetch(this.rutaServidor + ruta, {
+      credentials: "include",
+      method: "DELETE",
     });
     return await respuestaRaw.json();
   }
