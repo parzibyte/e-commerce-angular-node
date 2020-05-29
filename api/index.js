@@ -22,6 +22,7 @@ const existeProducto = (carrito, producto) => {
 
 const DIRECTORIO_PERMITIDO_CORS = "http://localhost:4200",
   DIRECTORIO_FOTOS = path.join(__dirname, "fotos_productos"),
+  DIRECTORIO_DIST = path.join(__dirname, "dist"),
   PUERTO = 3000;
 
 // app.use(cors({
@@ -37,6 +38,8 @@ app.use(session({
 }))
 // Fotos
 app.use("/foto_producto", express.static(DIRECTORIO_FOTOS));
+// Estático
+app.use("/", express.static(DIRECTORIO_DIST));
 
 if (!fs.existsSync(DIRECTORIO_FOTOS)) {
   fs.mkdirSync(DIRECTORIO_FOTOS);
