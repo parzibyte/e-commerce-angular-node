@@ -15,6 +15,9 @@
 
 __sordid details following...__
 
+# Créditos
+https://icons8.com
+
 # ECommerceAngularNode
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
