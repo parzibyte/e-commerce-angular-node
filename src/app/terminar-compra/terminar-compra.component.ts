@@ -30,10 +30,8 @@ export class TerminarCompraComponent implements OnInit {
 
 
     this.compraTerminada=true;
-    console.log("Se hace la compra!")
-    console.log(this.clienteModel);
-    //TODO: validar de manera nativa
     stepper.next();
+    this.dataSharingService.changeMessage("car_updated")
   }
 
   public total() {
