@@ -107,7 +107,7 @@ app.post("/compra", async (req, res) => {
   }
   // Limpiar carrito...
   req.session.carrito = [];
-  // !listo!
+  // ¡listo!
   res.json(true);
 });
 app.get("/carrito", (req, res) => {
