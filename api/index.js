@@ -1,16 +1,16 @@
 /*
 
-    Programado por Luis Cabrera Benito 
-  ____          _____               _ _           _       
- |  _ \        |  __ \             (_) |         | |      
- | |_) |_   _  | |__) |_ _ _ __ _____| |__  _   _| |_ ___ 
+    Programado por Luis Cabrera Benito
+  ____          _____               _ _           _
+ |  _ \        |  __ \             (_) |         | |
+ | |_) |_   _  | |__) |_ _ _ __ _____| |__  _   _| |_ ___
  |  _ <| | | | |  ___/ _` | '__|_  / | '_ \| | | | __/ _ \
  | |_) | |_| | | |  | (_| | |   / /| | |_) | |_| | ||  __/
  |____/ \__, | |_|   \__,_|_|  /___|_|_.__/ \__, |\__\___|
-         __/ |                               __/ |        
-        |___/                               |___/         
-    
-    
+         __/ |                               __/ |
+        |___/                               |___/
+
+
     Blog:       https://parzibyte.me/blog
     Ayuda:      https://parzibyte.me/blog/contrataciones-ayuda/
     Contacto:   https://parzibyte.me/blog/contacto/
@@ -38,7 +38,7 @@ const existeProducto = (carrito, producto) => {
 }
 
 
-const DIRECTORIO_PERMITIDO_CORS = "http://localhost:4200",
+const DOMINIO_PERMITIDO_CORS = "http://localhost:4200",
   DIRECTORIO_FOTOS = path.join(__dirname, "fotos_productos"),
   DIRECTORIO_DIST = path.join(__dirname, "dist"),
   PUERTO = 3000;
@@ -59,7 +59,7 @@ if (!fs.existsSync(DIRECTORIO_FOTOS)) {
 }
 app.use((req, res, next) => {
   res.set("Access-Control-Allow-Credentials", "true");
-  res.set("Access-Control-Allow-Origin", DIRECTORIO_PERMITIDO_CORS);
+  res.set("Access-Control-Allow-Origin", DOMINIO_PERMITIDO_CORS);
   res.set("Access-Control-Allow-Headers", "Content-Type");
   res.set("Access-Control-Allow-Methods", "DELETE");
   next();
